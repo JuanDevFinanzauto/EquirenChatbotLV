@@ -1,0 +1,17 @@
+version: '3.8'
+
+# Docker Compose principal que orquesta todos los servicios
+services:
+  chatbot:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on:
+      - redis
+      - milvus
+
+# Importar configuraciones individuales
+include:
+  - ./docker/redis/docker-compose.redis.yml
+  - ./docker/milvus/docker-compose.milvus.yml
